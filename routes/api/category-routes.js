@@ -6,6 +6,16 @@ const { Category, Product } = require('../../models');
 router.get('/', (req, res) => {
   // find all categories
   // be sure to include its associated Products
+  Category.findAll({
+    attributes: ['id', 'category_name']
+  })
+    .then(dbCategoryData => {
+      if (!dbCategoryData) {
+        res.status(404).json({ message: 'No category with this id' });
+        return;
+      }
+      res.json(dbCategoryData);
+    })
 });
 
 router.get('/:id', (req, res) => {
@@ -20,7 +30,6 @@ router.get('/:id', (req, res) => {
         res.status(404).json({ message: 'No category with this id' });
         return;
       }
-
       res.json(dbCategoryData);
     })
 });
@@ -39,10 +48,28 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
   // update a category by its `id` value
+  Category.update(req.body, { where: { id: req.params.id } })
+    .then(dbCategoryData => {
+      if (!dbCategoryData) {
+        res.status(404).json({ message: 'No category with this id' });
+        return;
+      }
+
+      res.json(dbCategoryData);
+    })
 });
 
 router.delete('/:id', (req, res) => {
   // delete a category by its `id` value
+  Category.destroy({ where: { id: req.params.id } })
+    .then(dbCategoryData => {
+      if (!dbCategoryData) {
+        res.status(404).json({ message: 'No category with this id' });
+        return;
+      }
+      
+      res.json(dbCategoryData);
+    })
 });
 
 module.exports = router;
