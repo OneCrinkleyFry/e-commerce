@@ -9,13 +9,11 @@ router.get('/', (req, res) => {
   Category.findAll({
     attributes: ['id', 'category_name']
   })
-    .then(dbCategoryData => {
-      if (!dbCategoryData) {
-        res.status(404).json({ message: 'No category with this id' });
-        return;
-      }
-      res.json(dbCategoryData);
-    })
+    .then(dbCategoryData => res.json(dbCategoryData))
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+  });
 });
 
 router.get('/:id', (req, res) => {
@@ -32,6 +30,10 @@ router.get('/:id', (req, res) => {
       }
       res.json(dbCategoryData);
     })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+  });
 });
 
 router.post('/', (req, res) => {
