@@ -65,6 +65,10 @@ router.put('/:id', (req, res) => {
 
       res.json(dbCategoryData);
     })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 router.delete('/:id', (req, res) => {
@@ -78,6 +82,10 @@ router.delete('/:id', (req, res) => {
 
       res.json(dbCategoryData);
     })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 module.exports = router;
