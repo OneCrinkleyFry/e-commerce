@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
       {
         model: Tag
       }
-    ] 
+    ]
   })
     .then(dbProductData => res.json(dbProductData))
     .catch(err => res.status(500).json(err));
@@ -36,7 +36,7 @@ router.get('/:id', (req, res) => {
       {
         model: Tag
       }
-    ] 
+    ]
   })
     .then(dbProductData => res.json(dbProductData))
     .catch(err => res.status(500).json(err));
@@ -55,8 +55,7 @@ router.post('/', (req, res) => {
   Product.create(req.body)
     .then((product) => {
       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
-      //.length
-      if (req.body.tagIds) {
+      if (req.body.tagIds.length) {
         const productTagIdArr = req.body.tagIds.map((tag_id) => {
           return {
             product_id: product.id,
@@ -119,6 +118,16 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   // delete one product by its `id` value
+  Product.destroy({ where: { id: req.params.id } })
+    .then(dbProductData => {
+      if (!dbProductData) {
+        res.status(404).json({ message: 'There is not a product with this id' });
+        return;
+      }
+
+      res.json(dbProductData)
+    })
+    .catch(err => res.status(500).json(err));
 });
 
 module.exports = router;
