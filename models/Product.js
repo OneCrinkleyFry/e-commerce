@@ -23,14 +23,16 @@ Product.init(
       type: DataTypes.DECIMAL,
       allowNull: false,
       validate: {
-        min: 0.00
+        min: 0.00,
+        isDecimal: true
       }
     },
     stock: {
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
-        min: 0
+        min: 0,
+        isNumeric: true
       }
     },
     category_id: {
