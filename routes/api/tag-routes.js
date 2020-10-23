@@ -5,7 +5,7 @@ const { Tag, Product, ProductTag } = require('../../models');
 
 router.get('/', (req, res) => {
   // find all tags
-  // be sure to include its associated Product data
+  // includes its associated Product data
   Tag.findAll({
     attributes: ['id', 'tag_name']
   })
@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   // find a single tag by its `id`
-  // be sure to include its associated Product data
+  // includes its associated Product data
   Tag.findOne({
     attributes: ['id', 'tag_name']
   })
@@ -37,7 +37,7 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  // create a new tag
+  // creates a new tag
   Tag.create({ tag_name: req.body.tag_name })
     .then(dbTagData => res.json(dbTagData))
     .catch(err => {
@@ -47,7 +47,7 @@ router.post('/', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
-  // update a tag's name by its `id` value
+  // updates a tag's name by its `id` value
   Tag.update(req.body, { where: { id: req.params.id } })
     .then(dbTagData => {
       if (!dbTagData) {
@@ -64,7 +64,7 @@ router.put('/:id', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
-  // delete on tag by its `id` value
+  // deletes on tag by its `id` value
   Tag.destroy({ where: { id: req.params.id } })
     .then(dbTagData => {
       if (!dbTagData) {

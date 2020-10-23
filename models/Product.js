@@ -10,16 +10,19 @@ class Product extends Model {}
 // set up fields and rules for Product model
 Product.init(
   {
+    // id primary key
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
     },
+    // name
     product_name: {
       type: DataTypes.STRING,
       allowNull: false
     },
+    // price
     price: {
       type: DataTypes.DECIMAL,
       allowNull: false,
@@ -28,6 +31,7 @@ Product.init(
         isDecimal: true
       }
     },
+    // the number in stock
     stock: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -36,6 +40,7 @@ Product.init(
         isNumeric: true
       }
     },
+    // foreign key to the category table
     category_id: {
       type: DataTypes.INTEGER,
       references: { 
