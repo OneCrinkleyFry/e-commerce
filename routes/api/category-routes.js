@@ -7,13 +7,16 @@ router.get('/', (req, res) => {
   // find all categories
   // be sure to include its associated Products
   Category.findAll({
-    attributes: ['id', 'category_name']
+    attributes: ['id', 'category_name'],
+    include: {
+      model: Product
+    }
   })
     .then(dbCategoryData => res.json(dbCategoryData))
     .catch(err => {
       console.log(err);
       res.status(500).json(err);
-  });
+    });
 });
 
 router.get('/:id', (req, res) => {
@@ -21,7 +24,10 @@ router.get('/:id', (req, res) => {
   // be sure to include its associated Products
   Category.findOne({
     where: { id: req.params.id },
-    attributes: ['id', 'category_name']
+    attributes: ['id', 'category_name'],
+    include: {
+      model: Product
+    }
   })
     .then(dbCategoryData => {
       if (!dbCategoryData) {
@@ -33,7 +39,7 @@ router.get('/:id', (req, res) => {
     .catch(err => {
       console.log(err);
       res.status(500).json(err);
-  });
+    });
 });
 
 router.post('/', (req, res) => {
@@ -69,7 +75,7 @@ router.delete('/:id', (req, res) => {
         res.status(404).json({ message: 'No category with this id' });
         return;
       }
-      
+
       res.json(dbCategoryData);
     })
 });
