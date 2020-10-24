@@ -22,3 +22,22 @@
       * Get one tag based on the id, and its associated products.
       * Update one tag based on the id.
       * Delete one tag based on the id.
+## Contributor
+  Josh Miller
+
+## Languages
+  * Javascript
+  * JSON
+  * SQL
+  ### Libraries/frameworks
+    * Node.js
+    * Express.js
+    * Sequelize.js
+    * dotenv
+    * mysql2
+## Walkthrough Video
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/jlZ9aIEP6QY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+A video of my api methods.
+
